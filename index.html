@@ -33,7 +33,13 @@ document.getElementById('techName').innerText = TECH;
 window.OneSignalDeferred = window.OneSignalDeferred || [];
 OneSignalDeferred.push(async function(OneSignal){
   try{
-    await OneSignal.init({appId: ONESIGNAL_APP_ID, allowLocalhostAsSecureOrigin: true, notifyButton: {enable:true}});
+    await OneSignal.init({
+      appId: ONESIGNAL_APP_ID,
+      allowLocalhostAsSecureOrigin: true,
+      notifyButton: {enable:true},
+      serviceWorkerParam: { scope: "/sav/" },
+      serviceWorkerPath: "OneSignalSDKWorker.js"
+    });
     // Check subscription status
     var checkSub = async () => {
       var id = OneSignal.User.PushSubscription.id || "no-id";
